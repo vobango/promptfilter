@@ -1,0 +1,135 @@
+<!doctype = 'html'>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="https://arme.ee/images/favicon.png" />
+  <title>PromptFilter</title>
+  <link rel="stylesheet" href="foundation.css">
+  <style>
+    :root {
+      --bgcolor: #ffaa00;
+      --brightness: 100%;
+      --blur: 0px;
+      --contrast: 100%;
+      --grayscale: 0%;
+      --invert: 0;
+      --sepia: 0%;
+      --hue-rotate: 0deg;
+      --opacity: 100%;
+      --saturation: 100%;
+    }
+    body {
+      text-align: center;
+      background: linear-gradient(#103d87, #02122d);
+      font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    }
+    h1 {
+      margin-top: 30px;
+      font-size: 42pt;
+      color: #ddd;
+    }
+    .container {
+      width: 1000px;
+      padding: 30px 0 30px 0;
+      margin: auto;
+      background: var(--bgcolor);
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+    img {
+      width: 940px;
+      filter: blur(var(--blur))
+        brightness(var(--brightness))
+        contrast(var(--contrast))
+        grayscale(var(--grayscale))
+        invert(var(--invert))
+        sepia(var(--sepia))
+        hue-rotate(var(--hue-rotate))
+        opacity(var(--opacity))
+        saturate(var(--saturation))
+    }
+    .hl {
+      color: var(--bgcolor);
+    }
+    label {
+      color: #ddd;
+    }
+    input {
+      margin: 10px;
+    }
+    input[type="color"] {
+      padding: 0;
+    }
+    .sliders {
+      width: 60%;
+      margin: auto;
+      display: flex;
+      justify-content: space-around;
+      align-content: center;
+      flex-wrap: wrap;
+    }
+    .footer {
+      margin: 50px 0 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Prompt<span class="hl">Filter</span></h1>
+  <h4 class="subheader">Add temporary filters to an image with the CSS 'filter' property.</h4>
+  <div class="container">
+    <img class="image" src="linn.jpg">
+  </div>
+  <div class="sliders">
+    <div class="singleSlider">
+      <label for="blur">Blur</label>
+      <input type="range" name="blur" min="0" max="20" value="0" data-units="px">
+    </div>
+    <div class="singleSlider">
+      <label for="brightness">Brightness</label>
+      <input type="range" name="brightness" min="0" max="200" value="100" data-units="%">
+    </div>
+    <div class="singleSlider">
+      <label for="contrast">Contrast</label>
+      <input type="range" name="contrast" min="0" max="200" value="100" data-units="%">
+    </div>
+    <div class="singleSlider">
+      <label for="grayscale">Grayscale</label>
+      <input type="range" name="grayscale" min="0" max="100" value="0" data-units="%">
+    </div>
+    <div class="singleSlider">
+      <label for="invert">Invert</label>
+      <input type="range" name="invert" min="0" max="1" value="0">
+    </div>
+    <div class="singleSlider">
+      <label for="sepia">Sepia</label>
+      <input type="range" name="sepia" min="0" max="100" value="0" data-units="%">
+    </div>
+    <div class="singleSlider">
+      <label for="hue-rotate">Hue rotation</label>
+      <input type="range" name="hue-rotate" min="0" max="360" value="0" data-units="deg">
+    </div>
+    <div class="singleSlider">
+      <label for="opacity">Opacity</label>
+      <input type="range" name="opacity" min="0" max="100" value="100" data-units="%">
+    </div>
+    <div class="singleSlider">
+      <label for="saturation">Saturation</label>
+      <input type="range" name="saturation" min="0" max="200" value="100" data-units="%">
+    </div>
+  </div>
+  <div class="footer">
+    <h6 class="subheader"><em>Kaspar Arme, 2017</em></h6>
+  </div>
+  <script>
+    const inputs = document.querySelectorAll(".sliders input");
+    function updateInput() {
+      const suffix = this.dataset.units || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+    inputs.forEach(input => input.addEventListener('change', updateInput))
+    inputs.forEach(input => input.addEventListener('mousemove', updateInput))
+  </script>
+</body>
+</html>
